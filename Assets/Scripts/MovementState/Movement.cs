@@ -72,8 +72,4 @@ public class Movement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
     }
-    private void OnDrawGizmos(){
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(spherePos,controller.radius - 0.05f);
-    }
 }

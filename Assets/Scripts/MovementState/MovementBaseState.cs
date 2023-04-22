@@ -1,5 +1,4 @@
 
-
 public abstract class MovementBaseState
 {
     public abstract void EnterState(Movement movement);

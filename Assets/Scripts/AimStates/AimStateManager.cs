@@ -21,6 +21,7 @@ public class AimStateManager : MonoBehaviour
     [SerializeField] Transform aimPos;
     [SerializeField] float aimSmoothSpeed = 20;
     [SerializeField] LayerMask aimMask;
+
     void Start()
     {
         vCam = GetComponentInChildren<CinemachineVirtualCamera>();
