@@ -18,10 +18,9 @@ public class AimStateManager : MonoBehaviour
     [HideInInspector]public float hipFov;
     [HideInInspector]public float currentFov;
     public float fovSmoothSpeed = 10;
-    [SerializeField] Transform aimPos;
+    public Transform aimPos;
     [SerializeField] float aimSmoothSpeed = 20;
     [SerializeField] LayerMask aimMask;
-
     void Start()
     {
         vCam = GetComponentInChildren<CinemachineVirtualCamera>();
@@ -41,7 +40,7 @@ public class AimStateManager : MonoBehaviour
 
         vCam.m_Lens.FieldOfView = Mathf.Lerp(vCam.m_Lens.FieldOfView,currentFov,fovSmoothSpeed * Time.deltaTime);
 
-        Vector2 screenCentre = new Vector2(Screen.width/2,Screen.height/2);
+       Vector2 screenCentre = new Vector2(Screen.width/2,Screen.height/2);
         Ray ray = Camera.main.ScreenPointToRay(screenCentre);
 
         if(Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, aimMask))

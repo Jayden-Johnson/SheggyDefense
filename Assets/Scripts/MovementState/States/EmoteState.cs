@@ -10,10 +10,11 @@ public class EmoteState : MovementBaseState
     }
     public override void UpdateState(Movement movement)
     {
-        if(Input.GetKeyDown(KeyCode.W)) ExitState(movement, movement.Walk);
+        if(Input.GetKeyDown(KeyCode.W)) ExitState(movement,movement.Walk);
     }
     void ExitState(Movement movement, MovementBaseState state){
         movement.anim.SetBool("Emote",false);
         movement.SwitchState(state);
-    }   
+    }
+        
 }
