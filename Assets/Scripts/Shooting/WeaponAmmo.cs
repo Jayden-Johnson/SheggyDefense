@@ -1,18 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponAmmo : MonoBehaviour
 {
     public int clipSize;
     public int extraAmmo;
     public AudioClip Reloading;
+
+    public Text ammoDisplay;
     
     [HideInInspector] public int currentAmmo;
     // Start is called before the first frame update
     void Start()
     {
         currentAmmo = clipSize;
+        UpdateammoDisplay();
     }
 
     public void Reload(){
@@ -33,5 +38,9 @@ public class WeaponAmmo : MonoBehaviour
             }
         }
         
+    }
+    private void UpdateammoDisplay()
+    {
+        ammoDisplay.text = string.Format("{0}/{1}", currentAmmo, extraAmmo);
     }
 }

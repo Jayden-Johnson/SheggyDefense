@@ -45,7 +45,7 @@ public class ActionStateManager : MonoBehaviour
         SwitchState(Default);
     }
 
-    public void MagOut(){
+    public void ReloadSound(){
         audioSource.PlayOneShot(ammo.Reloading);
     }
  
