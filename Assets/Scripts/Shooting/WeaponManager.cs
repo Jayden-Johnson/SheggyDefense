@@ -50,6 +50,7 @@ public class WeaponManager : MonoBehaviour
     {
         if(ShouldFire()) Fire();
         muzzleFlashLight.intensity = Mathf.Lerp(muzzleFlashLight.intensity,0,lightReturnSpeed * Time.deltaTime);
+        ammo.ammoText.text = "Ammo: " + ammo.currentAmmo + "/" + ammo.extraAmmo;
     }
     bool ShouldFire(){
         fireRateTimer += Time.deltaTime;
@@ -60,7 +61,7 @@ public class WeaponManager : MonoBehaviour
         if(!semiAuto&&Input.GetKey(KeyCode.Mouse0)) return true;
         return false;
     }
-    void Fire(){
+    public void Fire(){
         fireRateTimer = 0;
         barrelPos.LookAt(aim.aimPos);
         audioSource.PlayOneShot(gunShot);
