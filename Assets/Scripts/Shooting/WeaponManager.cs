@@ -15,6 +15,7 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] Transform barrelPos;
     [SerializeField] float bulletVelocity;
     [SerializeField] int bulletsPerShot;
+    public float damage = 20;
     AimStateManager aim;
     
     //audio
@@ -74,6 +75,8 @@ public class WeaponManager : MonoBehaviour
         barrelPos.localEulerAngles = bloom.BloomAngle(barrelPos);
         for(int i = 0; i<bulletsPerShot; i ++){
             GameObject currentBullet = Instantiate(bullet, barrelPos.position,barrelPos.rotation);
+            bullet bulletScript = currentBullet.GetComponent<bullet>();
+            bulletScript.weapon = this;
             Rigidbody rb = currentBullet.GetComponent<Rigidbody>();
             rb.AddForce(barrelPos.forward * bulletVelocity,ForceMode.Impulse);
         }
