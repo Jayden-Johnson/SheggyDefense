@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class IdleState : MovementBaseState
 {
+    Movement movement;
+    void Start(){
+    }
    public override void EnterState(Movement movement)
     {
-        
+
     }
     public override void UpdateState(Movement movement)
     {
@@ -15,6 +18,15 @@ public class IdleState : MovementBaseState
             else movement.SwitchState(movement.Walk);
         }
         if(Input.GetKeyDown(KeyCode.C)) movement.SwitchState(movement.Crouch);
-        if(Input.GetKeyDown(KeyCode.B)) movement.SwitchState(movement.Emote);
-    }
+        if(Input.GetKeyDown(KeyCode.B)){
+            movement.SwitchState(movement.Emote);
+        }
+        if(Input.GetKeyDown(KeyCode.Space)){
+            movement.previousState = this;
+            movement.SwitchState(movement.Jump);
+        }
+    } 
+        
+
+    
 }
