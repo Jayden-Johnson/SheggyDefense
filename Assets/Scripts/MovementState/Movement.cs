@@ -79,9 +79,5 @@ public class Movement : MonoBehaviour
     }
     void Falling() => anim.SetBool("Falling",!IsGrounded());
     public void JumpForce() => velocity.y += jumpForce;
-        
-    
     public void Jumped() => jumped = true;
-        
-    
 }
