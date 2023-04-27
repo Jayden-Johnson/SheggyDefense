@@ -26,13 +26,11 @@ public class WeaponManager : MonoBehaviour
     WeaponRecoil recoil;
     WeaponAmmo ammo;
     WeaponBloom bloom;
-    bullet bulletScript;
 
     Light muzzleFlashLight;
     ParticleSystem muzzleFlashParticles;
     float lightIntensity;
     [SerializeField] float lightReturnSpeed;
-
     public float enemyKickbackForce =100;
 
     // Start is called before the first frame update
@@ -80,7 +78,6 @@ public class WeaponManager : MonoBehaviour
             GameObject currentBullet = Instantiate(bullet, barrelPos.position,barrelPos.rotation);
             bullet bulletScript = currentBullet.GetComponent<bullet>();
             bulletScript.weapon = this;
-            bulletScript.dir = barrelPos.transform.forward;
             Rigidbody rb = currentBullet.GetComponent<Rigidbody>();
             rb.AddForce(barrelPos.forward * bulletVelocity,ForceMode.Impulse);
         }
