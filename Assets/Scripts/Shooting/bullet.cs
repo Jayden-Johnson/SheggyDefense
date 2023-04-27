@@ -6,7 +6,6 @@ public class bullet : MonoBehaviour
 {
     [SerializeField] float timeToDestroy;
     [HideInInspector] public WeaponManager weapon;
-    [HideInInspector] public Vector3 dir;
     
     // Start is called before the first frame update
     void Start()
@@ -24,6 +23,14 @@ public class bullet : MonoBehaviour
                 enemyHealth.isDead = true;
             }
         }
+        else {
+            //spawn decal
+            ContactPoint contact = collision.contacts[0];
+            Vector3 decalOffset = contact.normal * 0.01f;
+            Quaternion rotation = Quaternion.LookRotation(-contact.normal, Vector3.up);
+            GameObject decal = Instantiate(decalPreFab, contact.point + decalOffset, rotation);
+        }
         Destroy(this.gameObject);
     }
+    public void spawnDecal() {}
 }
