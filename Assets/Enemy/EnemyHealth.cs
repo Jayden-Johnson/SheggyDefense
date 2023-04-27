@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     RagdollManager ragdollManager;
-    [SerializeField]float health;
+    public float health;
+    [HideInInspector]public bool isDead;
     void Start(){
         ragdollManager = GetComponent<RagdollManager>();
     }
