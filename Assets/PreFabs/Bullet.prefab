@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee00c63a80668414d9e32d67338dd9ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToDestroy: 15
+  Despawn: 10
   weapon: {fileID: 0}
   dir: {x: 0, y: 0, z: 0}
   decalsSpawned: 0

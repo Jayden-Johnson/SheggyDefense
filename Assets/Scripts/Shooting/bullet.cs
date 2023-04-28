@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-    [SerializeField] float timeToDestroy;
+    [SerializeField] float Despawn;
     [HideInInspector] public WeaponManager weapon;
     public Vector3 dir;
     [HideInInspector] public int decalsSpawned;
@@ -14,7 +14,7 @@ public class bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(this.gameObject,timeToDestroy);
+        Destroy(this.gameObject,Despawn);
     }
 
     void OnCollisionEnter(Collision collision){
@@ -22,9 +22,9 @@ public class bullet : MonoBehaviour
             EnemyHealth enemyHealth = collision.gameObject.GetComponentInParent<EnemyHealth>();
             enemyHealth.TakeDamage(weapon.damage);
             if(enemyHealth.health<=0 && enemyHealth.isDead == false){
+                enemyHealth.isDead = true;
                 Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
                 rb.AddForce(dir * weapon.enemyKickbackForce,ForceMode.Impulse);
-                enemyHealth.isDead = true;
             }
         }
         else {
@@ -33,8 +33,10 @@ public class bullet : MonoBehaviour
             Vector3 decalOffset = contact.normal * 0.01f;
             Quaternion rotation = Quaternion.LookRotation(-contact.normal, Vector3.up);
             GameObject decal = Instantiate(decalPrefab, contact.point + decalOffset, rotation);
+            Destroy(decal.gameObject,Despawn);
         }
         Destroy(this.gameObject);
     }
-    public void spawnDecal() {}
+    public void spawnDecal() {
+    }
 }
