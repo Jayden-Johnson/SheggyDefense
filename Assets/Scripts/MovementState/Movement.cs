@@ -32,6 +32,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float gravity =-9.81f;
     [SerializeField] float jumpForce = 10;
     [HideInInspector] public bool jumped;
+
     Vector3 velocity;
     // Start is called before the first frame update
     void Start()
