@@ -32,6 +32,10 @@ public class Movement : MonoBehaviour
     [SerializeField] float gravity =-9.81f;
     [SerializeField] float jumpForce = 10;
     [HideInInspector] public bool jumped;
+    private float crouchOffset = 0.6f;
+    private float unCrouchOffset = 1;
+    float crouchHeight = 1.5f;
+    float unCrouchHeight = 2;
 
     Vector3 velocity;
     // Start is called before the first frame update
@@ -77,6 +81,18 @@ public class Movement : MonoBehaviour
         else if (velocity.y < 0) velocity.y = -2;
 
         controller.Move(velocity * Time.deltaTime);
+    }
+    public void Crouching(){
+        controller.height = crouchHeight;
+        Vector3 newCenter = controller.center;
+        newCenter.y = crouchOffset;
+        controller.center = newCenter;
+    }
+    public void unCrouching(){
+        controller.height = unCrouchHeight;
+        Vector3 newCenter = controller.center;
+        newCenter.y = unCrouchOffset;
+        controller.center = newCenter;
     }
     void Falling() => anim.SetBool("Falling",!IsGrounded());
     public void JumpForce() => velocity.y += jumpForce;

@@ -31,17 +31,17 @@ public class UnequipManager : MonoBehaviour
             rigBuilder.enabled = false; 
             anim.SetLayerWeight(layerIndex, 0f);
             gun.SetActive(false);
+            equiped = false;
             anim.SetBool("CanEmote",true);
             anim.SetBool("Emote",false);
-            equiped = false;
             }
             else{
             rigBuilder.enabled = true;
             anim.SetLayerWeight(layerIndex, 1f);
             gun.SetActive(true);
+            equiped = true;
             anim.SetBool("CanEmote",false);
             anim.SetBool("Emote",false);
-            equiped = true;
             }
         }
 
