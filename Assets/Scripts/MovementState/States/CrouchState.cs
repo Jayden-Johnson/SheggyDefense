@@ -18,7 +18,7 @@ public class CrouchState : MovementBaseState
             if (movement.dir.magnitude<0.1f){
                 ExitState(movement, movement.Idle);
             } 
-            else{
+            else {
                 ExitState(movement,movement.Walk);
             } 
         }
