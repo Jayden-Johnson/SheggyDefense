@@ -32,25 +32,9 @@ public class UnequipManager : MonoBehaviour
             else
             {
                 equip();
-            if (equiped){
-            equiped = false;
-            rigBuilder.enabled = false; 
-            anim.SetLayerWeight(layerIndex, 0f);
-            gun.SetActive(false);
-            anim.SetBool("CanEmote",true);
-            anim.SetBool("Emote",false);
             }
-            else{
-            equiped = true;
-            rigBuilder.enabled = true;
-            anim.SetLayerWeight(layerIndex, 1f);
-            gun.SetActive(true);
-            anim.SetBool("CanEmote",false);
-            anim.SetBool("Emote",false);
-            }
-        }
-    }
-    public void equip() 
+    }    }
+    public void equip()
     {
         rigBuilder.enabled = true;
         anim.SetLayerWeight(layerIndex, 1f);
