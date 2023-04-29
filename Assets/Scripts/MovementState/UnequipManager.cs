@@ -12,14 +12,13 @@ public class UnequipManager : MonoBehaviour
     public RigBuilder rigBuilder;
     public bool equiped = true;
     public GameObject gun;
-
     
 
     // Start is called before the first frame update
     void Start()
     {
-        gun.SetActive(true);
         anim = GetComponent<Animator>();
+        gun.SetActive(true);
     }
 
     // Update is called once per frame
@@ -28,18 +27,18 @@ public class UnequipManager : MonoBehaviour
        if (Input.GetKeyDown(KeyCode.E))
         {
             if (equiped){
+            equiped = false;
             rigBuilder.enabled = false; 
             anim.SetLayerWeight(layerIndex, 0f);
             gun.SetActive(false);
-            equiped = false;
             anim.SetBool("CanEmote",true);
             anim.SetBool("Emote",false);
             }
             else{
+            equiped = true;
             rigBuilder.enabled = true;
             anim.SetLayerWeight(layerIndex, 1f);
             gun.SetActive(true);
-            equiped = true;
             anim.SetBool("CanEmote",false);
             anim.SetBool("Emote",false);
             }

@@ -6,7 +6,6 @@ public class EmoteState : MovementBaseState
 {
    public override void EnterState(Movement movement)
     {
-        movement.Crouching();
         movement.anim.SetBool("Emote",true);
     }
     public override void UpdateState(Movement movement)
@@ -15,7 +14,6 @@ public class EmoteState : MovementBaseState
     }
     void ExitState(Movement movement, MovementBaseState state){
         movement.anim.SetBool("Emote",false);
-        movement.unCrouching();
         movement.SwitchState(state);
     }
         
