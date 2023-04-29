@@ -13,7 +13,7 @@ public class UnequipManager : MonoBehaviour
     public bool equiped = true;
     public GameObject gun;
 
-    
+    public bool equippedBeforeEmote;
 
     // Start is called before the first frame update
     void Start()
@@ -27,24 +27,42 @@ public class UnequipManager : MonoBehaviour
     {
        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (equiped){
-            rigBuilder.enabled = false; 
-            anim.SetLayerWeight(layerIndex, 0f);
-            gun.SetActive(false);
-            equiped = false;
-            anim.SetBool("CanEmote",true);
-            anim.SetBool("Emote",false);
+            if (equiped)
+            {
+                unEquip();
             }
-            else{
-            rigBuilder.enabled = true;
-            anim.SetLayerWeight(layerIndex, 1f);
-            gun.SetActive(true);
-            equiped = true;
-            anim.SetBool("CanEmote",false);
-            anim.SetBool("Emote",false);
+            else
+            {
+                equip();
             }
         }
-
-    
     }
+    public void equip() 
+    {
+        rigBuilder.enabled = true;
+        anim.SetLayerWeight(layerIndex, 1f);
+        gun.SetActive(true);
+        equiped = true;
+        anim.SetBool("CanEmote",false);
+        anim.SetBool("Emote",false);
+    }
+
+    public void unEquip() 
+    {
+        rigBuilder.enabled = false; 
+        anim.SetLayerWeight(layerIndex, 0f);
+        gun.SetActive(false);
+        equiped = false;
+        anim.SetBool("CanEmote", true);
+        anim.SetBool("Emote",false);
+    }
+    
+    //this makes it possible to reference unequipmanager in other scripts
+    public static UnequipManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+    
 }
