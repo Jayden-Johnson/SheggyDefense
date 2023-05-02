@@ -15,31 +15,36 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] Transform barrelPos;
     [SerializeField] float bulletVelocity;
     [SerializeField] int bulletsPerShot;
-    public float damage = 20;
+
+    //Variables
     AimStateManager aim;
+    ActionStateManager actions;
+    WeaponRecoil recoil;
+    [HideInInspector] public WeaponAmmo ammo;
+    WeaponBloom bloom;
     
     //audio
     [SerializeField] AudioClip gunShot;
-    AudioSource audioSource;
+    [HideInInspector] public AudioSource audioSource;
 
-    ActionStateManager actions;
-    WeaponRecoil recoil;
-    WeaponAmmo ammo;
-    WeaponBloom bloom;
-
+    //muzzleflash
     Light muzzleFlashLight;
     ParticleSystem muzzleFlashParticles;
     float lightIntensity;
     [SerializeField] float lightReturnSpeed;
+
+    //enemy related stuff
     public float enemyKickbackForce =100;
+    public float damage = 20;
+
+    //weaponswap
+    public Transform leftHandTarget, leftHandHint;
+    WeaponClassManager weaponClass;
 
     // Start is called before the first frame update
     void Start()
     {
-        recoil = GetComponent<WeaponRecoil>();
-        audioSource = GetComponent<AudioSource>();
         aim = GetComponentInParent<AimStateManager>();
-        ammo = GetComponent<WeaponAmmo>();
         bloom = GetComponent<WeaponBloom>();
         muzzleFlashLight = GetComponentInChildren<Light>();
         muzzleFlashParticles = GetComponentInChildren<ParticleSystem>();
@@ -47,6 +52,17 @@ public class WeaponManager : MonoBehaviour
         muzzleFlashLight.intensity = 0;
         fireRateTimer = fireRate;
         actions = GetComponentInParent<ActionStateManager>();
+    }
+
+    private void OnEnable(){
+        if(weaponClass == null){
+            weaponClass = GetComponentInParent<WeaponClassManager>();
+            ammo = GetComponent<WeaponAmmo>();
+            audioSource = GetComponent<AudioSource>();
+            recoil = GetComponent<WeaponRecoil>(); 
+            recoil.recoilFollowPos = weaponClass.recoilFollowPos;
+        }
+        weaponClass.SetCurrentWeapon(this);
     }
 
     // Update is called once per frame
@@ -61,6 +77,7 @@ public class WeaponManager : MonoBehaviour
         if (fireRateTimer < fireRate) return false;
         if(ammo.currentAmmo==0)return false;
         if(actions.currentState==actions.Reload) return false;
+        if(actions.currentState == actions.Swap) return false;
         if(semiAuto&&Input.GetKeyDown(KeyCode.Mouse0)) return true;
         if(!semiAuto&&Input.GetKey(KeyCode.Mouse0)) return true;
         return false;
@@ -87,4 +104,11 @@ public class WeaponManager : MonoBehaviour
         muzzleFlashParticles.Play();
         muzzleFlashLight.intensity = lightIntensity;
     }
+    void OnDisable()
+{
+    if (UnequipManager.instance != null)
+    {
+        UnequipManager.instance.SetLastEnabledGun(gameObject);
+    }
+}
 }
