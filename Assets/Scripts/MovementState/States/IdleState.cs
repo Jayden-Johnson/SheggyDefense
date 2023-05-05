@@ -24,7 +24,10 @@ public class IdleState : MovementBaseState
             } else {
                 UnequipManager.instance.equippedBeforeEmote = false;
             }
-            movement.SwitchState(movement.Emote);
+            if (UnequipManager.instance.equiped == false){
+                movement.SwitchState(movement.Emote);
+            }
+            
         } 
         if(Input.GetKeyDown(KeyCode.C)) {
             movement.SwitchState(movement.Crouch);

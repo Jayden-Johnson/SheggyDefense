@@ -100,9 +100,10 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    void TriggerMuzzleFlash(){
+    public void TriggerMuzzleFlash(){
         muzzleFlashParticles.Play();
         muzzleFlashLight.intensity = lightIntensity;
+        
     }
     void OnDisable()
 {
@@ -111,4 +112,10 @@ public class WeaponManager : MonoBehaviour
         UnequipManager.instance.SetLastEnabledGun(gameObject);
     }
 }
+public static WeaponManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 }

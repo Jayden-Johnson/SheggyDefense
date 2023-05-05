@@ -8,67 +8,60 @@ public class UnequipManager : MonoBehaviour
     public bool equippedBeforeEmote;
     public Animator anim;
     public int layerIndex;
-    public RigBuilder rigBuilder;
     public bool equiped = true;
     public List<GameObject> guns;
-
-    private GameObject lastEnabledGun; // add this variable to keep track of the last enabled gun
+    public RigBuilder rigBuilder;
+    private GameObject lastEnabledGun; 
+    public GameObject myGameObject;
     private WeaponClassManager weaponClassManager;
 
+    public MultiAimConstraint rHandAim;
+    public MultiAimConstraint bodyAim;
     void Start()
     {
+        equiped = true;
         anim = GetComponent<Animator>();
         weaponClassManager = GetComponent<WeaponClassManager>();
+        var rigBuilder = myGameObject.GetComponent< RigBuilder >();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (equiped)
-            {
-                unEquip();
-            }
-            else
-            {
-                equip();
-            }
-        }
+        
     }
 
     public void equip()
     {
-        rigBuilder.enabled = true;
+        rHandAim.weight = 1f;
+        bodyAim.weight = 1f;
         anim.SetLayerWeight(layerIndex, 1f);
-
-        if (lastEnabledGun != null) // enable the last enabled gun if it exists
+        if (lastEnabledGun != null)
         {
             lastEnabledGun.SetActive(true);
         }
-        else // otherwise, enable the first gun in the list
+        else
         {
             guns[0].SetActive(true);
             lastEnabledGun = guns[0];
         }
 
         equiped = true;
-        anim.SetBool("CanEmote", false);
-        anim.SetBool("Emote", false);
-        weaponClassManager.enabled = false;
+        weaponClassManager.enabled = true;
+        rigBuilder.layers[0].active = true; 
     }
 
     public void unEquip()
     {
-        rigBuilder.enabled = false;
+        rHandAim.weight = 0f;
+        bodyAim.weight = 0f;
         anim.SetLayerWeight(layerIndex, 0f);
         foreach (GameObject gun in guns)
         {
             gun.SetActive(false);
         }
         equiped = false;
-        anim.SetBool("CanEmote", true);
-        anim.SetBool("Emote", false);
-        weaponClassManager.enabled = true;
+        weaponClassManager.enabled = false;
+        rigBuilder.layers[0].active = false; 
     }
 
     public static UnequipManager instance;

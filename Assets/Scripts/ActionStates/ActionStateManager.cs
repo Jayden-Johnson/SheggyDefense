@@ -13,6 +13,11 @@ public class ActionStateManager : MonoBehaviour
 
     public SwapState Swap = new SwapState();
 
+    public EquipState Equip = new EquipState();
+
+    public UnequipState Unequip = new UnequipState();
+
+
     [HideInInspector]public WeaponManager currentWeapon;
     [HideInInspector]public WeaponAmmo ammo;
     AudioSource audioSource;
@@ -33,6 +38,15 @@ public class ActionStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState(this);
+        if(Input.GetKeyDown(KeyCode.E)){
+        if (UnequipManager.instance.equiped == true){
+            SwitchState(Unequip);
+        }
+        if (UnequipManager.instance.equiped == false){
+            anim.SetLayerWeight(UnequipManager.instance.layerIndex, 1f);
+            SwitchState(Equip);
+        }
+        }
     }
     public void SwitchState(ActionBaseState state){
         currentState = state;

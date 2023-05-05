@@ -12112,11 +12112,14 @@ MonoBehaviour:
   equippedBeforeEmote: 0
   anim: {fileID: 1812214779}
   layerIndex: 1
-  rigBuilder: {fileID: 1812214778}
   equiped: 1
   guns:
   - {fileID: 3388530920800280532}
   - {fileID: 3381831374257350143}
+  rigBuilder: {fileID: 1812214778}
+  myGameObject: {fileID: 67726232}
+  rHandAim: {fileID: 632851555}
+  bodyAim: {fileID: 1689016125}
 --- !u!114 &1812214784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15208,8 +15211,8 @@ MonoBehaviour:
   lightReturnSpeed: 3
   enemyKickbackForce: 100
   damage: 20
-  leftHandTarget: {fileID: 0}
-  leftHandHint: {fileID: 0}
+  leftHandTarget: {fileID: 595528185}
+  leftHandHint: {fileID: 1805807047}
 --- !u!1 &3778444343691895369
 GameObject:
   m_ObjectHideFlags: 0
