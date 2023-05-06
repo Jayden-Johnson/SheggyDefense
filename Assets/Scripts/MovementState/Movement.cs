@@ -11,6 +11,7 @@ public class Movement : MonoBehaviour
     public RunState Run = new RunState();
     public CrouchState Crouch = new CrouchState();
     public EmoteState Emote = new EmoteState();
+    public AudioClip emoteSound;
     public JumpState Jump = new JumpState();
     public MovementBaseState previousState;
     [HideInInspector] public Animator anim;
@@ -29,6 +30,8 @@ public class Movement : MonoBehaviour
     [SerializeField] float groundYOffset;
     [SerializeField]LayerMask groundMask;
     Vector3 spherePos;
+    public AudioSource audioSource;
+
     [SerializeField] float gravity =-9.81f;
     [SerializeField] float jumpForce = 10;
     [HideInInspector] public bool jumped;
@@ -41,6 +44,7 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         SwitchState(Idle);
@@ -93,6 +97,16 @@ public class Movement : MonoBehaviour
         Vector3 newCenter = controller.center;
         newCenter.y = unCrouchOffset;
         controller.center = newCenter;
+    }
+    public void PlayEmoteSound(){
+        EmoteSound();
+    }
+    void EmoteSound()
+    {
+    if (!audioSource.isPlaying)
+    {
+        audioSource.PlayOneShot(emoteSound);
+    }
     }
     void Falling() => anim.SetBool("Falling",!IsGrounded());
     public void JumpForce() => velocity.y += jumpForce;

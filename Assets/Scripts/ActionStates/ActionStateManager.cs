@@ -17,7 +17,6 @@ public class ActionStateManager : MonoBehaviour
 
     public UnequipState Unequip = new UnequipState();
 
-
     [HideInInspector]public WeaponManager currentWeapon;
     [HideInInspector]public WeaponAmmo ammo;
     AudioSource audioSource;

@@ -47,7 +47,9 @@ public class UnequipManager : MonoBehaviour
 
         equiped = true;
         weaponClassManager.enabled = true;
-        rigBuilder.layers[0].active = true; 
+        rigBuilder.layers[0].active = true;
+        anim.SetBool("EmoteBool",false); 
+        anim.SetBool("Emote",false);
     }
 
     public void unEquip()
@@ -62,6 +64,8 @@ public class UnequipManager : MonoBehaviour
         equiped = false;
         weaponClassManager.enabled = false;
         rigBuilder.layers[0].active = false; 
+        anim.SetBool("EmoteBool",true);
+        anim.SetBool("Emote",false);
     }
 
     public static UnequipManager instance;

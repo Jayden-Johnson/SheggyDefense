@@ -11,7 +11,12 @@ public class EmoteState : MovementBaseState
 
     public override void UpdateState(Movement movement)
     {
-        if (movement.dir.magnitude>0.1f) ExitState(movement, movement.Walk);
+        if (movement.dir.magnitude>0.1f){
+        ExitState(movement, movement.Walk);
+        movement.audioSource.mute = true;
+        movement.audioSource.Stop();
+        movement.audioSource.time = 0f;
+        } 
 
     }
 

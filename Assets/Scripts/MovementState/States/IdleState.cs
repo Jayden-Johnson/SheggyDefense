@@ -18,6 +18,8 @@ public class IdleState : MovementBaseState
             else movement.SwitchState(movement.Walk);
         }
         if(Input.GetKeyDown(KeyCode.B)) {
+            movement.audioSource.Play();
+            movement.audioSource.mute = false;
             if(UnequipManager.instance.equiped) {
                 UnequipManager.instance.equippedBeforeEmote = true;
                 UnequipManager.instance.unEquip();

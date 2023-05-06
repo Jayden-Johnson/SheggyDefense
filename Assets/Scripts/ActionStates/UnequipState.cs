@@ -10,6 +10,6 @@ public class UnequipState : ActionBaseState
     }
     public override void UpdateState(ActionStateManager actions)
     {
-        actions.SwitchState(actions.Default);
+        
     }
 }
