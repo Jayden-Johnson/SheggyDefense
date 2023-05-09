@@ -9,10 +9,14 @@ public class EnemyHealth : MonoBehaviour
     RagdollManager ragdollManager;
     public float health;
     public float despawnTime = 15f;
+    EnemyAI enemyAI;
+    private Animator animator;
 
     [HideInInspector]public bool isDead;
     void Start(){
         ragdollManager = GetComponent<RagdollManager>();
+        enemyAI = GetComponent<EnemyAI>();
+        animator = GetComponent<Animator>();
     }
     public void TakeDamage(float damage){
         health-=damage;
@@ -24,6 +28,8 @@ public class EnemyHealth : MonoBehaviour
     void EnemyDeath(){
         ragdollManager.TriggerRagdoll();
         Invoke("Despawn", despawnTime);
+        animator.runtimeAnimatorController = null;
+        enemyAI.enabled = false;
         Destroy(slider);
         Destroy(healthUI);
    }

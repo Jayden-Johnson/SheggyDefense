@@ -35,10 +35,11 @@ public class Movement : MonoBehaviour
     [SerializeField] float gravity =-9.81f;
     [SerializeField] float jumpForce = 10;
     [HideInInspector] public bool jumped;
-    private float crouchOffset = 0.6f;
+    private float crouchOffset = 0.8f;
     private float unCrouchOffset = 1;
     float crouchHeight = 1.5f;
     float unCrouchHeight = 2;
+    RagdollManager ragdollManager;
 
     Vector3 velocity;
     // Start is called before the first frame update
