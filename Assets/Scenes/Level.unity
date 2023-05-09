@@ -17520,6 +17520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 5195157410308340175}
+  animPlayer: {fileID: 1812214779}
   agent: {fileID: 0}
   player: {fileID: 0}
   Ground:

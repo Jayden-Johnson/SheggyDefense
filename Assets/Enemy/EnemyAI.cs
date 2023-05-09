@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
     public Animator anim;
+    public Animator animPlayer;
     public NavMeshAgent agent;
     public Transform player;
     public LayerMask Ground, Player;
@@ -44,6 +45,9 @@ public class EnemyAI : MonoBehaviour
            alreadyAttacked = true;
            Invoke (nameof(ResetAttack), timeBetweenAttacks);
         }
+    }
+    public void Attacked(){
+        animPlayer.SetTrigger("Damaged");
     }
     public void ResetAttack(){
         alreadyAttacked = false;
