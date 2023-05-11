@@ -27,7 +27,7 @@ public class EnemyHealth : MonoBehaviour
     }
     void EnemyDeath(){
         ragdollManager.TriggerRagdoll();
-        Invoke("Despawn", despawnTime);
+        Invoke("Despawn",despawnTime);
         animator.runtimeAnimatorController = null;
         enemyAI.enabled = false;
         Destroy(slider);
