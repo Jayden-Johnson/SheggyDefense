@@ -229,6 +229,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Despawn: 10
   weapon: {fileID: 0}
-  dir: {x: 0, y: 0, z: 0}
+  dir: {x: 1, y: 1, z: 1}
   decalsSpawned: 0
   decalPrefab: {fileID: 3488274950288080809, guid: 5e6eb7fe66322d0489fa01306e85ff49, type: 3}
