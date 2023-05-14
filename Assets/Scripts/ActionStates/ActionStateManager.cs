@@ -2,33 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.SceneManagement;
 
 public class ActionStateManager : MonoBehaviour
 {
    [HideInInspector]public ActionBaseState currentState;
 
     public ReloadState Reload = new ReloadState();
-    
     public DefaultState Default = new DefaultState();
-
     public SwapState Swap = new SwapState();
-
     public EquipState Equip = new EquipState();
-
     public UnequipState Unequip = new UnequipState();
 
     [HideInInspector]public WeaponManager currentWeapon;
     [HideInInspector]public WeaponAmmo ammo;
+
     AudioSource audioSource;
     UnequipManager unequipManager;
     Movement movement;
-    
-
-    [HideInInspector] public Animator anim;
+        
+    public Animator anim;
+    public Animator animPlayer;
 
     public MultiAimConstraint rHandAim;
     public TwoBoneIKConstraint lHandIK;
-    // Start is called before the first frame update
+
+    public bool playerDead = false;
+    public PlayerHealth PlayerHealth;
+
+    public GameObject gameOverScreen;
+  
     void Start()
     {
         unequipManager = GetComponent<UnequipManager>();
@@ -42,14 +45,16 @@ public class ActionStateManager : MonoBehaviour
     {
         currentState.UpdateState(this);
         if(Input.GetKeyDown(KeyCode.E) && unequipManager.enabled == true){
-        if (UnequipManager.instance.equiped == true){
-            SwitchState(Unequip);
+            if (UnequipManager.instance.equiped == true){
+                SwitchState(Unequip);
+            }
+            if (UnequipManager.instance.equiped == false){
+                anim.SetLayerWeight(UnequipManager.instance.layerIndex, 1f);
+                SwitchState(Equip);
+            }
         }
-        if (UnequipManager.instance.equiped == false){
-            anim.SetLayerWeight(UnequipManager.instance.layerIndex, 1f);
-            SwitchState(Equip);
-        }
-        }
+
+                        
     }
     public void SwitchState(ActionBaseState state){
         currentState = state;
@@ -72,11 +77,25 @@ public class ActionStateManager : MonoBehaviour
         ammo = weapon.ammo;
     }
     public void PlayerDeath(){
-        UnequipManager.instance.unEquip();
-        unequipManager.enabled = false;
-        movement.enabled = false;
+        if(playerDead == false) 
+        {
+            UnequipManager.instance.unEquip();
+            unequipManager.enabled = false;
+            movement.enabled = false;
+            animPlayer.SetTrigger("Death");
 
-        
+            playerDead = true;
+            PlayerHealth.playerHealth = 0;
+            Debug.Log("player dead");
+               
+            gameOverScreen.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
     
+    public void Respawn() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
+
+
