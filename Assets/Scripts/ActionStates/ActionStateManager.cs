@@ -20,15 +20,18 @@ public class ActionStateManager : MonoBehaviour
     [HideInInspector]public WeaponManager currentWeapon;
     [HideInInspector]public WeaponAmmo ammo;
     AudioSource audioSource;
+    UnequipManager unequipManager;
+    WeaponClassManager weaponClassManager;
 
     [HideInInspector] public Animator anim;
 
     public MultiAimConstraint rHandAim;
     public TwoBoneIKConstraint lHandIK;
-
     // Start is called before the first frame update
     void Start()
     {
+        unequipManager = GetComponent<UnequipManager>();
+        weaponClassManager = GetComponent<WeaponClassManager>();
         SwitchState(Default);
         anim = GetComponent<Animator>();
     }
@@ -37,7 +40,7 @@ public class ActionStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState(this);
-        if(Input.GetKeyDown(KeyCode.E)){
+        if(Input.GetKeyDown(KeyCode.E) && unequipManager.enabled == true){
         if (UnequipManager.instance.equiped == true){
             SwitchState(Unequip);
         }
@@ -67,4 +70,11 @@ public class ActionStateManager : MonoBehaviour
         audioSource = weapon.audioSource;
         ammo = weapon.ammo;
     }
+    public void PlayerDeath(){
+        UnequipManager.instance.unEquip();
+        unequipManager.enabled = false;
+
+        
+    }
+    
 }

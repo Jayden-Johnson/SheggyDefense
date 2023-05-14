@@ -16,7 +16,7 @@ public class EnemyAI : MonoBehaviour
     public float AttackRange;
     public bool playerInAttackRange;
     private CharacterController theGuy;
-    public float damage = 20;
+    public float enemyDamage = 20;
 
     private void Awake(){
         agent = GetComponent<NavMeshAgent>();
@@ -39,8 +39,7 @@ public class EnemyAI : MonoBehaviour
     public void AttackPlayer(){
         anim.SetBool("Walking",false);
         agent.SetDestination(transform.position);
-        Vector3 targetPosition = new Vector3(player.position.x, agent.transform.position.y, player.position.z);
-        transform.LookAt(targetPosition);
+        transform.LookAt(player);
         if (!alreadyAttacked){
            alreadyAttacked = true;
            Invoke (nameof(ResetAttack), timeBetweenAttacks);
@@ -48,6 +47,8 @@ public class EnemyAI : MonoBehaviour
     }
     public void Attacked(){
         animPlayer.SetTrigger("Damaged");
+        PlayerHealth.instance.PlayerTakeDamage(enemyDamage);
+        if (PlayerHealth.instance.playerHealth == 0) animPlayer.SetTrigger("Death");
     }
     public void ResetAttack(){
         alreadyAttacked = false;
