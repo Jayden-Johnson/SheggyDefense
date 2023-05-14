@@ -21,7 +21,8 @@ public class ActionStateManager : MonoBehaviour
     [HideInInspector]public WeaponAmmo ammo;
     AudioSource audioSource;
     UnequipManager unequipManager;
-    WeaponClassManager weaponClassManager;
+    Movement movement;
+    
 
     [HideInInspector] public Animator anim;
 
@@ -31,7 +32,7 @@ public class ActionStateManager : MonoBehaviour
     void Start()
     {
         unequipManager = GetComponent<UnequipManager>();
-        weaponClassManager = GetComponent<WeaponClassManager>();
+        movement = GetComponent<Movement>();
         SwitchState(Default);
         anim = GetComponent<Animator>();
     }
@@ -73,6 +74,7 @@ public class ActionStateManager : MonoBehaviour
     public void PlayerDeath(){
         UnequipManager.instance.unEquip();
         unequipManager.enabled = false;
+        movement.enabled = false;
 
         
     }
