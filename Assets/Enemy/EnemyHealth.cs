@@ -22,18 +22,19 @@ public class EnemyHealth : MonoBehaviour
         health-=damage;
         slider.value = health;
         if(health<=0){
-        EnemyDeath();
+            EnemyDeath();
         } 
     }
-    void EnemyDeath(){
+    public void EnemyDeath() {
         ragdollManager.TriggerRagdoll();
         Invoke("Despawn",despawnTime);
         animator.runtimeAnimatorController = null;
         enemyAI.enabled = false;
         Destroy(slider);
         Destroy(healthUI);
-   }
-   void Despawn(){
-    Destroy(gameObject);
-   }
+    }
+    void Despawn(){
+
+        Destroy(gameObject);
+    }
 }

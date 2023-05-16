@@ -11,14 +11,16 @@ public class JumpState : MovementBaseState
     }
     public override void UpdateState(Movement movement)
     {
-       if(movement.jumped == true && movement.IsGrounded()){
-        movement.jumped = false;
-        if(movement.hzInput == 0 && movement.vInput == 0){
-            movement.SwitchState(movement.Idle);
-        }
-        else if(Input.GetKey(KeyCode.LeftShift)) movement.SwitchState(movement.Run);
-        else movement.SwitchState(movement.Walk);
+        if(movement.jumped == true && movement.IsGrounded()){
+            movement.jumped = false;
+
+            if(movement.hzInput == 0 && movement.vInput == 0){
+                movement.SwitchState(movement.Idle);
+            }
+            
+            else if(Input.GetKey(KeyCode.LeftShift)) movement.SwitchState(movement.Run);
+            else movement.SwitchState(movement.Walk);
         
-       }
+        }
     }
 }

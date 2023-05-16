@@ -9,22 +9,22 @@ public class PlayerHealth : MonoBehaviour
     public Slider playerHealthBar;
     Animator anim;
     public float playerHealth;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-    public static PlayerHealth instance;
-    void Awake(){
-        instance = this;
-    }
+
+    public ActionStateManager ActionStateManager;
+
+
     public void PlayerTakeDamage(float enemyDamage){
         playerHealth-=enemyDamage;
-        playerHealthBar.value = playerHealth;
+        Debug.Log("player health = " + playerHealth);
     }
-    // Update is called once per frame
+
     void Update()
     {
-        
+        if (playerHealth == 0) 
+        {
+            ActionStateManager.PlayerDeath();
+        }  
+
+        playerHealthBar.value = playerHealth;
     }
 }
