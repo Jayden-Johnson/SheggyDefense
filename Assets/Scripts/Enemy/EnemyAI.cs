@@ -18,6 +18,9 @@ public class EnemyAI : MonoBehaviour
     private CharacterController theGuy;
     public float enemyDamage = 20;
 
+
+    public PlayerHealth PlayerHealth;
+
     private void Awake(){
         agent = GetComponent<NavMeshAgent>();
         theGuy = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
@@ -40,6 +43,7 @@ public class EnemyAI : MonoBehaviour
         anim.SetBool("Walking",false);
         agent.SetDestination(transform.position);
         transform.LookAt(player);
+
         if (!alreadyAttacked){
            alreadyAttacked = true;
            Invoke (nameof(ResetAttack), timeBetweenAttacks);
@@ -47,8 +51,7 @@ public class EnemyAI : MonoBehaviour
     }
     public void Attacked(){
         animPlayer.SetTrigger("Damaged");
-        PlayerHealth.instance.PlayerTakeDamage(enemyDamage);
-        if (PlayerHealth.instance.playerHealth == 0) animPlayer.SetTrigger("Death");
+        PlayerHealth.PlayerTakeDamage(enemyDamage);
     }
     public void ResetAttack(){
         alreadyAttacked = false;

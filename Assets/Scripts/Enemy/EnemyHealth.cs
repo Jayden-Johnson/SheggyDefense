@@ -11,29 +11,38 @@ public class EnemyHealth : MonoBehaviour
     public float despawnTime = 15f;
     EnemyAI enemyAI;
     private Animator animator;
+    public PointsManager pointsManager;
 
     [HideInInspector]public bool isDead;
+
+
     void Start(){
         ragdollManager = GetComponent<RagdollManager>();
         enemyAI = GetComponent<EnemyAI>();
         animator = GetComponent<Animator>();
     }
+
     public void TakeDamage(float damage){
         health-=damage;
         slider.value = health;
-        if(health<=0){
-        EnemyDeath();
+        
+        if(health<=0 && !isDead)
+        {
+            EnemyDeath();
         } 
     }
-    void EnemyDeath(){
+    public void EnemyDeath() {
         ragdollManager.TriggerRagdoll();
         Invoke("Despawn",despawnTime);
         animator.runtimeAnimatorController = null;
         enemyAI.enabled = false;
         Destroy(slider);
         Destroy(healthUI);
-   }
-   void Despawn(){
-    Destroy(gameObject);
-   }
+        isDead = true;
+        pointsManager.pointBalance += 1;
+    }
+    void Despawn(){
+
+        Destroy(gameObject);
+    }
 }
