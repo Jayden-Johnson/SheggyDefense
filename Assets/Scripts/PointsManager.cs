@@ -8,7 +8,6 @@ public class PointsManager : MonoBehaviour
     [HideInInspector] public int pointBalance;
     public TextMeshProUGUI pointText;
     public TextMeshProUGUI pointText2;
-    [HideInInspector] public bool lookingAtShop = false;
     public GameObject shopPopUp;
     public AimStateManager aimStateManager;
     public GameObject shopMenu;
@@ -23,7 +22,7 @@ public class PointsManager : MonoBehaviour
         pointText.text = "Points: " + pointBalance.ToString();
         pointText2.text = "Balance: " + pointBalance.ToString();
 
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetKeyDown(KeyCode.E) && aimStateManager.lookingAtShop) {
             if(!inShop)
             {
                 enterShop();
