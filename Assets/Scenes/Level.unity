@@ -3232,7 +3232,7 @@ GameObject:
   - component: {fileID: 853511699}
   m_Layer: 6
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: AmmoUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15000,7 +15000,6 @@ MonoBehaviour:
   pointBalance: 0
   pointText: {fileID: 247142990}
   pointText2: {fileID: 1166464647}
-  lookingAtShop: 0
   shopPopUp: {fileID: 1110080647}
   aimStateManager: {fileID: 1812214780}
   shopMenu: {fileID: 918219927}
@@ -16178,9 +16177,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1872742058}
+  gameUI: {fileID: 620886026}
   aimStateManager: {fileID: 1812214780}
   pointsManager: {fileID: 1587375234}
-  gameUI: {fileID: 620886026}
 --- !u!1 &1887359909
 GameObject:
   m_ObjectHideFlags: 0
@@ -16530,7 +16529,7 @@ GameObject:
   - component: {fileID: 2061211026}
   m_Layer: 6
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: AmmoUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

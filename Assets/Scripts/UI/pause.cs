@@ -1,52 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class pause : MonoBehaviour
 {
     public GameObject pauseMenu;
-    public static bool isPaused = false;
+    public GameObject gameUI;
 
     public AimStateManager aimStateManager;
     public PointsManager pointsManager;
-    public GameObject gameUI;
 
+    private bool isPaused = false;
+    GameObject[] ammoUIObjects;
 
-    void Start() 
+    private void Start()
     {
+        ammoUIObjects = GameObject.FindGameObjectsWithTag("AmmoUI");
     }
 
-
-    void Update() 
+    private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !pointsManager.inShop) 
+        if (Input.GetKeyDown(KeyCode.Escape) && !pointsManager.inShop)
         {
-            if(isPaused == false)
+            if (isPaused == false)
             {
-                pauseGame();
-            } 
+                PauseGame();
+            }
             else
             {
-                unPauseGame(); 
+                UnpauseGame();
             }
         }
     }
 
-    public void pauseGame() {
+    private void PauseGame()
+    {
+        AmmoUIPause();
         Time.timeScale = 0;
         isPaused = true;
         pauseMenu.SetActive(true);
         gameUI.SetActive(false);
 
         Cursor.lockState = CursorLockMode.None;
-        
-        Debug.Log("paused");
 
         aimStateManager.enabled = false;
     }
-    
-    public void unPauseGame() {
+
+    private void UnpauseGame()
+    {
+        AmmoUIUnPause();
         Time.timeScale = 1;
         isPaused = false;
         pauseMenu.SetActive(false);
@@ -54,11 +54,12 @@ public class pause : MonoBehaviour
 
         aimStateManager.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
-        
-        Debug.Log("unpaused");
-    }
 
+        
+    }
     public void pauseGameNoMenu() {
+        WeaponManager.instance.enabled = false;
+        AmmoUIPause();
         Time.timeScale = 0;
         isPaused = true;
         gameUI.SetActive(false);
@@ -71,6 +72,8 @@ public class pause : MonoBehaviour
     }
     
     public void unPauseGameNoMenu() {
+        WeaponManager.instance.enabled = true;
+        AmmoUIUnPause();
         Time.timeScale = 1;
         isPaused = false;
         gameUI.SetActive(true);
@@ -80,4 +83,20 @@ public class pause : MonoBehaviour
         
         Debug.Log("unpaused");
     }
+    public void AmmoUIPause(){
+        foreach (GameObject i in ammoUIObjects)
+        {
+            i.SetActive(false);
+        }
+        
+    }
+     public void AmmoUIUnPause(){
+        foreach (GameObject i in ammoUIObjects)
+        {
+            i.SetActive(true);
+        }
+        
+    }
+    
+
 }
