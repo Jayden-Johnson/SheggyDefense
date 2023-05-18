@@ -31,6 +31,8 @@ public class ActionStateManager : MonoBehaviour
     public PlayerHealth PlayerHealth;
 
     public GameObject gameOverScreen;
+
+    public AimStateManager aimStateManager;
   
     void Start()
     {
@@ -44,11 +46,11 @@ public class ActionStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState(this);
-        if(Input.GetKeyDown(KeyCode.E) && unequipManager.enabled == true){
+        if(Input.GetKeyDown(KeyCode.E) && unequipManager.enabled == true && !aimStateManager.lookingAtShop){
             if (UnequipManager.instance.equiped == true){
                 SwitchState(Unequip);
             }
-            if (UnequipManager.instance.equiped == false){
+            if (UnequipManager.instance.equiped == false && !aimStateManager.lookingAtShop){
                 anim.SetLayerWeight(UnequipManager.instance.layerIndex, 1f);
                 SwitchState(Equip);
             }
