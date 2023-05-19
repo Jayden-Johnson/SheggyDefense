@@ -1278,7 +1278,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1877484667}
         m_TargetAssemblyTypeName: pause, Assembly-CSharp
-        m_MethodName: unPauseGame
+        m_MethodName: unPauseGameNoMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

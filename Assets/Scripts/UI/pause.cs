@@ -33,6 +33,7 @@ public class pause : MonoBehaviour
 
     private void PauseGame()
     {
+        WeaponManager.instance.enabled = false;
         AmmoUIPause();
         Time.timeScale = 0;
         isPaused = true;
@@ -46,6 +47,7 @@ public class pause : MonoBehaviour
 
     private void UnpauseGame()
     {
+        WeaponManager.instance.enabled = true;
         AmmoUIUnPause();
         Time.timeScale = 1;
         isPaused = false;
