@@ -27,4 +27,10 @@ public class PlayerHealth : MonoBehaviour
 
         playerHealthBar.value = playerHealth;
     }
+    public static PlayerHealth instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 }

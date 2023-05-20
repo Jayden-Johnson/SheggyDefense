@@ -10,7 +10,8 @@ public class WeaponClassManager : MonoBehaviour
     ActionStateManager actions;
 
     public WeaponManager[] weapons;
-    int currentWeaponIndex;
+    public int currentWeaponIndex;
+    public GameObject weaponPrefab;
     void Start(){
         
     }
@@ -20,6 +21,7 @@ public class WeaponClassManager : MonoBehaviour
             if (i == 0) weapons[i].gameObject.SetActive(true);
             else weapons[i].gameObject.SetActive(false);
         }
+        instance = this;
     }
 
     public void SetCurrentWeapon(WeaponManager weapon){
@@ -50,4 +52,23 @@ public class WeaponClassManager : MonoBehaviour
     public void WeaponPulledOut(){
         actions.SwitchState(actions.Default);
     }
+    public WeaponManager CreateNewWeapon()
+    {
+        GameObject newWeaponObject = weaponPrefab;
+        WeaponManager newWeapon = newWeaponObject.GetComponent<WeaponManager>();
+        return newWeapon;
+    }
+
+    public void AddNewWeapon()
+    {
+        WeaponManager newWeapon = CreateNewWeapon();
+        WeaponManager[] newWeaponsArray = new WeaponManager[weapons.Length + 1];
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            newWeaponsArray[i] = weapons[i];
+        }
+        newWeaponsArray[weapons.Length] = newWeapon;
+        weapons = newWeaponsArray;
+    }
+    public static WeaponClassManager instance;
 }

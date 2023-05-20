@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PointsManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PointsManager : MonoBehaviour
     public bool inShop = false;
     public pause pause;
     public bool asdff;
+    public Button button;
 
 
     void Update() 
@@ -47,8 +49,19 @@ public class PointsManager : MonoBehaviour
     }
 
     public void buyItem1() {
-        if (pointBalance >= 1) {
-            pointBalance -= 1;
+        if (pointBalance >= 20) {
+            pointBalance -= 20;
+            WeaponClassManager.instance.CreateNewWeapon();
+            WeaponClassManager.instance.AddNewWeapon();
+            button.interactable = false;
+        } else {
+            insufficientFunds.SetActive(true);
+        }
+    }
+    public void buyItem2() {
+        if (pointBalance >= 10) {
+            pointBalance -= 10;
+            PlayerHealth.instance.playerHealth = 100;
         } else {
             insufficientFunds.SetActive(true);
         }

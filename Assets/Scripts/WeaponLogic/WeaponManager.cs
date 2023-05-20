@@ -107,13 +107,6 @@ public class WeaponManager : MonoBehaviour
         muzzleFlashLight.intensity = lightIntensity;
         
     }
-    void OnDisable()
-    {
-        if (UnequipManager.instance != null)
-        {
-            UnequipManager.instance.SetLastEnabledGun(gameObject);
-        }
-    }
     
 public static WeaponManager instance;
 

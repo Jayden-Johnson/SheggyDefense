@@ -39,7 +39,7 @@ public class EnemyHealth : MonoBehaviour
         Destroy(slider);
         Destroy(healthUI);
         isDead = true;
-        pointsManager.pointBalance += 1;
+        pointsManager.pointBalance += 30;
     }
     void Despawn(){
 

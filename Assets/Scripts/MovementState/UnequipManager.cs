@@ -9,9 +9,7 @@ public class UnequipManager : MonoBehaviour
     public Animator anim;
     public int layerIndex;
     public bool equiped = true;
-    public List<GameObject> guns;
     public RigBuilder rigBuilder;
-    private GameObject lastEnabledGun; 
     public GameObject myGameObject;
     private WeaponClassManager weaponClassManager;
 
@@ -32,19 +30,10 @@ public class UnequipManager : MonoBehaviour
 
     public void equip()
     {
+        weaponClassManager.weapons[weaponClassManager.currentWeaponIndex].gameObject.SetActive(true);
         rHandAim.weight = 1f;
         bodyAim.weight = 1f;
         anim.SetLayerWeight(layerIndex, 1f);
-        if (lastEnabledGun != null)
-        {
-            lastEnabledGun.SetActive(true);
-        }
-        else
-        {
-            guns[0].SetActive(true);
-            lastEnabledGun = guns[0];
-        }
-
         equiped = true;
         weaponClassManager.enabled = true;
         rigBuilder.layers[0].active = true;
@@ -54,13 +43,11 @@ public class UnequipManager : MonoBehaviour
 
     public void unEquip()
     {
+        weaponClassManager.weapons[weaponClassManager.currentWeaponIndex].gameObject.SetActive(false);
         rHandAim.weight = 0f;
         bodyAim.weight = 0f;
         anim.SetLayerWeight(layerIndex, 0f);
-        foreach (GameObject gun in guns)
-        {
-            gun.SetActive(false);
-        }
+        
         equiped = false;
         weaponClassManager.enabled = false;
         rigBuilder.layers[0].active = false; 
@@ -73,10 +60,5 @@ public class UnequipManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-    }
-
-    public void SetLastEnabledGun(GameObject gun) // add this method to set the last enabled gun
-    {
-        lastEnabledGun = gun;
     }
 }
