@@ -11,6 +11,8 @@ public class pause : MonoBehaviour
     private bool isPaused = false;
     GameObject[] ammoUIObjects;
 
+    public bool noMenu;
+
     private void Start()
     {
         ammoUIObjects = GameObject.FindGameObjectsWithTag("AmmoUI");
@@ -22,83 +24,59 @@ public class pause : MonoBehaviour
         {
             if (isPaused == false)
             {
-                PauseGame();
+                PauseGame(false);
             }
             else
             {
-                UnpauseGame();
+                unPauseGame();
             }
         }
     }
 
-    private void PauseGame()
+    public void PauseGame(bool noMenu)
     {
-        WeaponManager.instance.enabled = false;
-        AmmoUIPause();
         Time.timeScale = 0;
         isPaused = true;
-        pauseMenu.SetActive(true);
+        WeaponManager.instance.enabled = false;
+        aimStateManager.enabled = false;
+
         gameUI.SetActive(false);
 
         Cursor.lockState = CursorLockMode.None;
 
-        aimStateManager.enabled = false;
+        if(noMenu == false) 
+        {
+            pauseMenu.SetActive(true);
+        }
     }
 
-    private void UnpauseGame()
+    public void unPauseGame()
     {
-        WeaponManager.instance.enabled = true;
-        AmmoUIUnPause();
         Time.timeScale = 1;
         isPaused = false;
+
         pauseMenu.SetActive(false);
         gameUI.SetActive(true);
 
-        aimStateManager.enabled = true;
-        Cursor.lockState = CursorLockMode.Locked;
-
-        
-    }
-    public void pauseGameNoMenu() {
-        WeaponManager.instance.enabled = false;
-        AmmoUIPause();
-        Time.timeScale = 0;
-        isPaused = true;
-        gameUI.SetActive(false);
-
-        Cursor.lockState = CursorLockMode.None;
-        
-        Debug.Log("paused");
-
-        aimStateManager.enabled = false;
-    }
-    
-    public void unPauseGameNoMenu() {
         WeaponManager.instance.enabled = true;
-        AmmoUIUnPause();
-        Time.timeScale = 1;
-        isPaused = false;
-        gameUI.SetActive(true);
-
         aimStateManager.enabled = true;
-        Cursor.lockState = CursorLockMode.Locked;
-        
-        Debug.Log("unpaused");
-    }
-    public void AmmoUIPause(){
-        foreach (GameObject i in ammoUIObjects)
-        {
-            i.SetActive(false);
-        }
-        
-    }
-     public void AmmoUIUnPause(){
-        foreach (GameObject i in ammoUIObjects)
-        {
-            i.SetActive(true);
-        }
-        
-    }
-    
 
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    //not really needed because there is now only one ammotext now
+
+    // public void AmmoUIPause(){
+    //     foreach (GameObject i in ammoUIObjects)
+    //     {
+    //         i.SetActive(false);
+    //     }
+        
+    // }
+    //  public void AmmoUIUnPause(){
+    //     foreach (GameObject i in ammoUIObjects)
+    //     {
+    //         i.SetActive(true);
+    //     }
+    // }
 }

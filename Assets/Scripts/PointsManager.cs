@@ -35,14 +35,14 @@ public class PointsManager : MonoBehaviour
     void enterShop() {
         shopMenu.SetActive(true);
         inShop = true;
-        pause.pauseGameNoMenu();
+        pause.PauseGame(true);
         insufficientFunds.SetActive(false);
     }
 
     void exitShop() {
         shopMenu.SetActive(false);
         inShop = false;
-        pause.unPauseGameNoMenu();
+        pause.unPauseGame();
 
     }
 
@@ -52,9 +52,5 @@ public class PointsManager : MonoBehaviour
         } else {
             insufficientFunds.SetActive(true);
         }
-    }
-
-    IEnumerator wait() {
-        yield return new WaitForSeconds(1);
     }
 }

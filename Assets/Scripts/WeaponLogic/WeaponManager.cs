@@ -108,12 +108,13 @@ public class WeaponManager : MonoBehaviour
         
     }
     void OnDisable()
-{
-    if (UnequipManager.instance != null)
     {
-        UnequipManager.instance.SetLastEnabledGun(gameObject);
+        if (UnequipManager.instance != null)
+        {
+            UnequipManager.instance.SetLastEnabledGun(gameObject);
+        }
     }
-}
+    
 public static WeaponManager instance;
 
     private void Awake()
