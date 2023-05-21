@@ -68,8 +68,12 @@ public class Movement : MonoBehaviour
     }
 
     void GetDirectionAndMove(){
-        hzInput = Input.GetAxis("Horizontal");
-        vInput = Input.GetAxis("Vertical");
+
+        if(InputManger.instance.canInput) {
+            hzInput = Input.GetAxis("Horizontal");
+            vInput = Input.GetAxis("Vertical");
+        }
+
         Vector3 airDir = Vector3.zero;
         if(!IsGrounded()) airDir = transform.forward * vInput + transform.right * hzInput;
         else dir = transform.forward * vInput + transform.right * hzInput;

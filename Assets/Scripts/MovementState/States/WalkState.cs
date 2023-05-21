@@ -10,14 +10,14 @@ public class WalkState : MovementBaseState
     }
     public override void UpdateState(Movement movement)
     {
-        if(Input.GetKey(KeyCode.LeftShift)) ExitState(movement, movement.Run);
-        else if(Input.GetKeyDown(KeyCode.C)) ExitState(movement, movement.Crouch);
+        if(Input.GetKey(KeyCode.LeftShift) && InputManger.instance.canInput) ExitState(movement, movement.Run);
+        else if(Input.GetKeyDown(KeyCode.C) && InputManger.instance.canInput) ExitState(movement, movement.Crouch);
         else if (movement.dir.magnitude<0.1f) ExitState(movement, movement.Idle);
 
         if(movement.vInput<0) movement.currentMoveSpeed = movement.walkBackSpeed;
         else movement.currentMoveSpeed = movement.walkSpeed;
         
-        if(Input.GetKeyDown(KeyCode.Space)){
+        if(Input.GetKeyDown(KeyCode.Space) && InputManger.instance.canInput){
             movement.previousState = this;
             ExitState(movement,movement.Jump);
         }

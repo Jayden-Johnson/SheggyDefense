@@ -8,7 +8,8 @@ public class pause : MonoBehaviour
     public AimStateManager aimStateManager;
     public PointsManager pointsManager;
 
-    private bool isPaused = false;
+    public bool isPaused = false;
+    public bool isPausedNoMenu = true;
     GameObject[] ammoUIObjects;
 
     public bool noMenu;
@@ -36,17 +37,15 @@ public class pause : MonoBehaviour
     public void PauseGame(bool noMenu)
     {
         Time.timeScale = 0;
-        isPaused = true;
-        WeaponManager.instance.enabled = false;
-        aimStateManager.enabled = false;
-
+        InputManger.instance.canInput = false;
         gameUI.SetActive(false);
-
         Cursor.lockState = CursorLockMode.None;
+        isPausedNoMenu = true;
 
         if(noMenu == false) 
         {
             pauseMenu.SetActive(true);
+            isPaused = true;
         }
     }
 
@@ -54,12 +53,12 @@ public class pause : MonoBehaviour
     {
         Time.timeScale = 1;
         isPaused = false;
+        isPausedNoMenu = false;
 
         pauseMenu.SetActive(false);
         gameUI.SetActive(true);
 
-        WeaponManager.instance.enabled = true;
-        aimStateManager.enabled = true;
+        InputManger.instance.canInput = true;
 
         Cursor.lockState = CursorLockMode.Locked;
     }
