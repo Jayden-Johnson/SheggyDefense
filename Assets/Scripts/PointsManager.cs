@@ -18,17 +18,24 @@ public class PointsManager : MonoBehaviour
     public bool asdff;
     public Button button;
 
+    public WeaponClassManager weaponClassManager;
+
 
     void Update() 
     {
-        pointText.text = "Points: " + pointBalance.ToString();
-        pointText2.text = "Balance: " + pointBalance.ToString();
+        pointText.text = "$" + pointBalance.ToString();
+        pointText2.text = "Balance: $" + pointBalance.ToString();
 
         if (Input.GetKeyDown(KeyCode.E) && aimStateManager.lookingAtShop) {
             if(!inShop)
             {
-                enterShop();
-            } else {
+                if(!pause.isPaused) 
+                {
+                    enterShop();
+                }
+            } 
+            else 
+            {
                 exitShop();
             }   
         }
@@ -45,14 +52,13 @@ public class PointsManager : MonoBehaviour
         shopMenu.SetActive(false);
         inShop = false;
         pause.unPauseGame();
-
     }
 
     public void buyItem1() {
         if (pointBalance >= 20) {
             pointBalance -= 20;
-            WeaponClassManager.instance.CreateNewWeapon();
-            WeaponClassManager.instance.AddNewWeapon();
+            weaponClassManager.CreateNewWeapon();
+            weaponClassManager.AddNewWeapon();
             button.interactable = false;
         } else {
             insufficientFunds.SetActive(true);
@@ -65,5 +71,9 @@ public class PointsManager : MonoBehaviour
         } else {
             insufficientFunds.SetActive(true);
         }
+    }
+
+    public void give30Points() {
+        pointBalance += 30;
     }
 }

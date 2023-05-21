@@ -12,16 +12,18 @@ public class WeaponClassManager : MonoBehaviour
     public WeaponManager[] weapons;
     public int currentWeaponIndex;
     public GameObject weaponPrefab;
-    void Start(){
+
+    void Start()
+    {
         
     }
-    private void Awake(){
+    private void Awake()
+    {
         currentWeaponIndex = 0;
         for(int i=0; i< weapons.Length; i++){
             if (i == 0) weapons[i].gameObject.SetActive(true);
             else weapons[i].gameObject.SetActive(false);
         }
-        instance = this;
     }
 
     public void SetCurrentWeapon(WeaponManager weapon){
@@ -43,6 +45,8 @@ public class WeaponClassManager : MonoBehaviour
             else currentWeaponIndex ++;
         }   
         weapons[currentWeaponIndex].gameObject.SetActive(true);
+
+        Debug.Log("current weaponindex: " + currentWeaponIndex);
     }
 
     public void WeaponPutAway(){
@@ -70,5 +74,4 @@ public class WeaponClassManager : MonoBehaviour
         newWeaponsArray[weapons.Length] = newWeapon;
         weapons = newWeaponsArray;
     }
-    public static WeaponClassManager instance;
 }

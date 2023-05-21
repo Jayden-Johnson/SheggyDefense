@@ -31,6 +31,7 @@ public class ActionStateManager : MonoBehaviour
     public PlayerHealth PlayerHealth;
 
     public GameObject gameOverScreen;
+    public GameObject gameUI;
 
     public AimStateManager aimStateManager;
   
@@ -46,7 +47,7 @@ public class ActionStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState(this);
-        if(Input.GetKeyDown(KeyCode.E) && unequipManager.enabled == true && !aimStateManager.lookingAtShop){
+        if(Input.GetKeyDown(KeyCode.E) && unequipManager.enabled == true && !aimStateManager.lookingAtShop && InputManger.instance.canInput){
             if (UnequipManager.instance.equiped == true){
                 SwitchState(Unequip);
             }
@@ -91,6 +92,7 @@ public class ActionStateManager : MonoBehaviour
             Debug.Log("player dead");
                
             gameOverScreen.SetActive(true);
+            gameUI.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
         }
     }

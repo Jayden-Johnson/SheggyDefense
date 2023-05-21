@@ -70,7 +70,7 @@ public class WeaponManager : MonoBehaviour
     {
         if(ShouldFire()) Fire();
         muzzleFlashLight.intensity = Mathf.Lerp(muzzleFlashLight.intensity,0,lightReturnSpeed * Time.deltaTime);
-        ammo.ammoText.text = "Ammo: " + ammo.currentAmmo + "/" + ammo.extraAmmo;
+        ammo.ammoText.text = ammo.currentAmmo + "/" + ammo.extraAmmo;
     }
     bool ShouldFire(){
         fireRateTimer += Time.deltaTime;
@@ -80,8 +80,8 @@ public class WeaponManager : MonoBehaviour
         if(actions.currentState == actions.Swap) return false;
         if(actions.currentState == actions.Equip) return false;
         if(actions.currentState == actions.Unequip) return false;
-        if(semiAuto&&Input.GetKeyDown(KeyCode.Mouse0)) return true;
-        if(!semiAuto&&Input.GetKey(KeyCode.Mouse0)) return true;
+        if(semiAuto&&Input.GetKeyDown(KeyCode.Mouse0) && InputManger.instance.canInput) return true;
+        if(!semiAuto&&Input.GetKey(KeyCode.Mouse0) && InputManger.instance.canInput) return true;
         return false;
     }
     public void Fire(){

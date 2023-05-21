@@ -37,8 +37,11 @@ public class AimStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        xAxis += Input.GetAxisRaw("Mouse X") * mouseSense;
-        yAxis -= Input.GetAxisRaw("Mouse Y") * mouseSense;
+        if(InputManger.instance.canInput){
+            xAxis += Input.GetAxisRaw("Mouse X") * mouseSense;
+            yAxis -= Input.GetAxisRaw("Mouse Y") * mouseSense;
+        }
+
         yAxis = Mathf.Clamp(yAxis,-40,40);
 
         currentState.UpdateState(this);

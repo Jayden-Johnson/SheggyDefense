@@ -18,7 +18,7 @@ public class JumpState : MovementBaseState
                 movement.SwitchState(movement.Idle);
             }
             
-            else if(Input.GetKey(KeyCode.LeftShift)) movement.SwitchState(movement.Run);
+            else if(Input.GetKey(KeyCode.LeftShift) && InputManger.instance.canInput) movement.SwitchState(movement.Run);
             else movement.SwitchState(movement.Walk);
         
         }
