@@ -82,6 +82,7 @@ public class ActionStateManager : MonoBehaviour
     public void PlayerDeath(){
         if(playerDead == false) 
         {
+            InputManger.instance.canInput = false;
             UnequipManager.instance.unEquip();
             unequipManager.enabled = false;
             movement.enabled = false;
