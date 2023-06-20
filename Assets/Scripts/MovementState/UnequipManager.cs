@@ -15,6 +15,7 @@ public class UnequipManager : MonoBehaviour
 
     public MultiAimConstraint rHandAim;
     public MultiAimConstraint bodyAim;
+    
     void Start()
     {
         equiped = true;
