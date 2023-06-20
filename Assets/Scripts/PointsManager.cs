@@ -17,7 +17,7 @@ public class PointsManager : MonoBehaviour
     public pause pause;
     public bool asdff;
     public Button button;
-
+    public PlayerHealth playerHealth;
     public WeaponClassManager weaponClassManager;
 
 
@@ -64,6 +64,7 @@ public class PointsManager : MonoBehaviour
             insufficientFunds.SetActive(true);
         }
     }
+    
     public void buyItem2() {
         if (pointBalance >= 10) {
             pointBalance -= 10;
