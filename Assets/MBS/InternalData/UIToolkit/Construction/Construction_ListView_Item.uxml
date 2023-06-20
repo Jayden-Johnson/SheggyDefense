@@ -1,8 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance"
-         engine="UnityEngine.UIElements" editor="UnityEditor.UIElements"
-         noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="flex-direction: row; align-items: center; justify-content: space-between; margin-left: 10px; margin-right: 10px; margin-top: 5px; margin-bottom: 5px;">
-        <ui:Label text="Label" display-tooltip-when-elided="true" />
-        <ui:Button text="Generate Mesh" display-tooltip-when-elided="true" />
-    </ui:VisualElement>
-</ui:UXML>
