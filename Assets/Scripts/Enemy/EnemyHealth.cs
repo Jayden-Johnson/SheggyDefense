@@ -11,7 +11,7 @@ public class EnemyHealth : MonoBehaviour
     public float despawnTime = 15f;
     EnemyAI enemyAI;
     private Animator animator;
-    public PointsManager pointsManager;
+    
 
     [HideInInspector]public bool isDead;
 
@@ -21,6 +21,7 @@ public class EnemyHealth : MonoBehaviour
         enemyAI = GetComponent<EnemyAI>();
         animator = GetComponent<Animator>();
     }
+    
 
     public void TakeDamage(float damage){
         health-=damage;
@@ -31,7 +32,7 @@ public class EnemyHealth : MonoBehaviour
             EnemyDeath();
         } 
     }
-    public void EnemyDeath() {
+    private void EnemyDeath() {
         ragdollManager.TriggerRagdoll();
         Invoke("Despawn",despawnTime);
         animator.runtimeAnimatorController = null;
@@ -39,10 +40,13 @@ public class EnemyHealth : MonoBehaviour
         Destroy(slider);
         Destroy(healthUI);
         isDead = true;
-        pointsManager.pointBalance += 30;
+        PointsManager.instance.pointBalance += 30;
     }
+    
     void Despawn(){
 
         Destroy(gameObject);
+
+        EnemySpawn.instance.waves[EnemySpawn.instance.currentWave].enemiesLeft --;
     }
 }

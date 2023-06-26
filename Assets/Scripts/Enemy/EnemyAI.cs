@@ -19,13 +19,15 @@ public class EnemyAI : MonoBehaviour
     public float enemyDamage = 20;
 
 
-    public PlayerHealth PlayerHealth;
+
+    
 
     private void Awake(){
         agent = GetComponent<NavMeshAgent>();
         theGuy = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
         attackRange = theGuy.radius + AttackRange;
         player = GameObject.Find("TheGuy").transform;
+        animPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
     }
     
     
@@ -51,7 +53,7 @@ public class EnemyAI : MonoBehaviour
     }
     public void Attacked(){
         animPlayer.SetTrigger("Damaged");
-        PlayerHealth.PlayerTakeDamage(enemyDamage);
+        PlayerHealth.instance.PlayerTakeDamage(enemyDamage);
     }
     public void ResetAttack(){
         alreadyAttacked = false;

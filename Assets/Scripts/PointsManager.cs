@@ -77,4 +77,10 @@ public class PointsManager : MonoBehaviour
     public void give30Points() {
         pointBalance += 30;
     }
+     public static PointsManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 }
