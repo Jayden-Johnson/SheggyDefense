@@ -12,7 +12,7 @@ public class EnemySpawn : MonoBehaviour
     [HideInInspector]public int currentWave;
     public float CountDown;
     private bool readyCountDown;
-
+    [HideInInspector] public int enemyCounter;
 
     
 
@@ -23,6 +23,7 @@ public class EnemySpawn : MonoBehaviour
         for(int i = 0; i < waves.Length; i++){
             waves[i].enemiesLeft = waves[i].enemies.Length;
         }
+        enemyCounter = waves[currentWave].enemiesLeft;
     }
 
     // Update is called once per frame
@@ -43,13 +44,14 @@ public class EnemySpawn : MonoBehaviour
         if (waves[currentWave].enemiesLeft == 0){
             currentWave ++;
             readyCountDown = true;
+            enemyCounter = waves[currentWave].enemiesLeft;
         }
     }
     private IEnumerator Spawn(){
-        xPos = Random.Range(-305,-497);
-        zPos = Random.Range(-305,-315);
         if(currentWave< waves.Length){
             for(int i = 0; i < waves[currentWave].enemies.Length; i ++){
+            float xPos = Random.Range(-305,-497);
+            float zPos = Random.Range(-305,-315);
             Instantiate(waves[currentWave].enemies[i], new Vector3(xPos, 2, zPos), Quaternion.identity);
             yield return new WaitForSeconds(waves[currentWave].timeToNextEnemy);
         }

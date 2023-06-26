@@ -11,6 +11,10 @@ public class EnemyHealth : MonoBehaviour
     public float despawnTime = 15f;
     EnemyAI enemyAI;
     private Animator animator;
+
+    
+
+    
     
 
     [HideInInspector]public bool isDead;
@@ -30,6 +34,7 @@ public class EnemyHealth : MonoBehaviour
         if(health<=0 && !isDead)
         {
             EnemyDeath();
+            EnemySpawn.instance.enemyCounter -=1;
         } 
     }
     private void EnemyDeath() {
