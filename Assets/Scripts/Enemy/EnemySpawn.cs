@@ -44,7 +44,9 @@ public class EnemySpawn : MonoBehaviour
         if (waves[currentWave].enemiesLeft == 0){
             currentWave ++;
             readyCountDown = true;
+            if(currentWave < waves.Length){
             enemyCounter = waves[currentWave].enemiesLeft;
+            }
         }
     }
     private IEnumerator Spawn(){
