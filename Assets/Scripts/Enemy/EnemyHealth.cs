@@ -12,11 +12,7 @@ public class EnemyHealth : MonoBehaviour
     EnemyAI enemyAI;
     private Animator animator;
 
-    
-
-    
-    
-
+   
     [HideInInspector]public bool isDead;
 
 
@@ -29,6 +25,16 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(float damage){
         health-=damage;
+        slider.value = health;
+        
+        if(health<=0 && !isDead)
+        {
+            EnemyDeath();
+            EnemySpawn.instance.enemyCounter -=1;
+        } 
+    }
+    public void TakeMeleeDamage(){
+        health-=ActionStateManager.instance.meleeDamage;
         slider.value = health;
         
         if(health<=0 && !isDead)

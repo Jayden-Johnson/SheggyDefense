@@ -34,7 +34,14 @@ public class ActionStateManager : MonoBehaviour
     public GameObject gameUI;
 
     public AimStateManager aimStateManager;
-  
+    public float meleeDamage = 50;
+    public GameObject fist;
+
+    public static ActionStateManager instance;
+
+    void Awake(){
+        instance = this;
+    }
     void Start()
     {
         unequipManager = GetComponent<UnequipManager>();
@@ -47,11 +54,14 @@ public class ActionStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState(this);
+        if (Input.GetKeyDown(KeyCode.Mouse0)&& !aimStateManager.lookingAtShop && InputManger.instance.canInput){
+            anim.SetTrigger("Punch");
+        }
         if(Input.GetKeyDown(KeyCode.E) && unequipManager.enabled == true && !aimStateManager.lookingAtShop && InputManger.instance.canInput){
             if (UnequipManager.instance.equiped == true){
                 SwitchState(Unequip);
             }
-            if (UnequipManager.instance.equiped == false && !aimStateManager.lookingAtShop){
+            if (UnequipManager.instance.equiped == false && !aimStateManager.lookingAtShop && WeaponClassManager.instance.weapons.Length > 0){
                 anim.SetLayerWeight(UnequipManager.instance.layerIndex, 1f);
                 SwitchState(Equip);
             }

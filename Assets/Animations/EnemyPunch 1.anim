@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EnemyPunch
+  m_Name: EnemyPunch 1
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -92895,7 +92895,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 1.3333334
+  - time: 1.5
     functionName: Attacked
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -13,6 +13,8 @@ public class AmmoTextManager : MonoBehaviour
 
     public Sprite M4Icon;
     public Sprite pistolIcon;
+    public GameObject pistol;
+    public GameObject m4;
 
 
     void Start() 
@@ -22,11 +24,11 @@ public class AmmoTextManager : MonoBehaviour
 
     void Update()
     {
-        if(weaponClassManager.currentWeaponIndex == 0) 
+        if(pistol.activeInHierarchy == true) 
         {
             switchIcon(pistolIcon);
         } 
-        if(weaponClassManager.currentWeaponIndex == 1) 
+        if(m4.activeInHierarchy == true) 
         {
             switchIcon(M4Icon);
         }

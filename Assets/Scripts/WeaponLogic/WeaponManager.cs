@@ -36,7 +36,6 @@ public class WeaponManager : MonoBehaviour
     //enemy related stuff
     public float enemyKickbackForce =100;
     public float damage = 20;
-
     //weaponswap
     public Transform leftHandTarget, leftHandHint;
     WeaponClassManager weaponClass;

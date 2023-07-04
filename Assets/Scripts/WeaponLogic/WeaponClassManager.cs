@@ -17,8 +17,12 @@ public class WeaponClassManager : MonoBehaviour
     {
         
     }
+    void Update(){
+        
+    }
     private void Awake()
     {
+        instance = this;
         currentWeaponIndex = 0;
         for(int i=0; i< weapons.Length; i++){
             if (i == 0) weapons[i].gameObject.SetActive(true);
@@ -74,4 +78,5 @@ public class WeaponClassManager : MonoBehaviour
         newWeaponsArray[weapons.Length] = newWeapon;
         weapons = newWeaponsArray;
     }
+    public static WeaponClassManager instance;
 }
