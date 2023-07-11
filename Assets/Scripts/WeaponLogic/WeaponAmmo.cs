@@ -6,17 +6,14 @@ using UnityEngine.UI;
 
 public class WeaponAmmo : MonoBehaviour
 {
-    public Text ammoText;
     public int clipSize;
     public int extraAmmo;
-
-    
-    public AudioClip Reloading;
-    
     public int currentAmmo;
 
+    public Text ammoText;
+    public AudioClip Reloading;
+    
 
-       
     void Start(){
         currentAmmo = clipSize;
     }    
@@ -31,9 +28,9 @@ public class WeaponAmmo : MonoBehaviour
         }
         else if (extraAmmo > 0)
         {
-            if(extraAmmo+currentAmmo>clipSize)
+            if(extraAmmo + currentAmmo > clipSize)
             {
-                int leftOverAmmo = extraAmmo+currentAmmo-clipSize;
+                int leftOverAmmo = extraAmmo + currentAmmo - clipSize;
                 extraAmmo = leftOverAmmo;
                 currentAmmo = clipSize;
             }
@@ -44,5 +41,4 @@ public class WeaponAmmo : MonoBehaviour
             }
         }
     }
-
 }

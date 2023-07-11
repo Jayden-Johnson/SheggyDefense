@@ -33,30 +33,36 @@ public class EnemySpawn : MonoBehaviour
             Debug.Log("Indeed deeds");
             return;
         }
+
         if(readyCountDown == true){
             CountDown -= Time.deltaTime;
         }
+
         if (CountDown <= 0){
             readyCountDown = false;
             CountDown = waves[currentWave].timeToNextWave;
             StartCoroutine(Spawn());
         }
+
         if (waves[currentWave].enemiesLeft == 0){
+
             currentWave ++;
             readyCountDown = true;
+
             if(currentWave < waves.Length){
-            enemyCounter = waves[currentWave].enemiesLeft;
+                enemyCounter = waves[currentWave].enemiesLeft;
             }
         }
     }
+    
     private IEnumerator Spawn(){
         if(currentWave< waves.Length){
             for(int i = 0; i < waves[currentWave].enemies.Length; i ++){
-            float xPos = Random.Range(-305,-497);
-            float zPos = Random.Range(-305,-315);
-            Instantiate(waves[currentWave].enemies[i], new Vector3(xPos, 2, zPos), Quaternion.identity);
-            yield return new WaitForSeconds(waves[currentWave].timeToNextEnemy);
-        }
+                float xPos = Random.Range(-305,-497);
+                float zPos = Random.Range(-305,-315);
+                Instantiate(waves[currentWave].enemies[i], new Vector3(xPos, 2, zPos), Quaternion.identity);
+                yield return new WaitForSeconds(waves[currentWave].timeToNextEnemy);
+            }
         }
         
     }
@@ -67,8 +73,9 @@ public class EnemySpawn : MonoBehaviour
         instance = this;
     }
 }
+
 [System.Serializable]
-public class Waves{
+public class Waves {
     [HideInInspector] public int enemiesLeft;
     public EnemyIndex[] enemies;
     public float timeToNextEnemy;
