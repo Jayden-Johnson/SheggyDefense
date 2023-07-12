@@ -5,6 +5,9 @@ public class pause : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject gameUI;
 
+    public AudioSource musicSource;
+    public AudioClip musicClip;
+
     public AimStateManager aimStateManager;
     public PointsManager pointsManager;
 
@@ -41,6 +44,7 @@ public class pause : MonoBehaviour
         gameUI.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         isPausedNoMenu = true;
+        musicSource.Pause();
 
         if(noMenu == false) 
         {
@@ -59,23 +63,9 @@ public class pause : MonoBehaviour
         gameUI.SetActive(true);
 
         InputManger.instance.canInput = true;
-
         Cursor.lockState = CursorLockMode.Locked;
+
+        musicSource.clip = musicClip;
+        musicSource.Play(0);
     }
-
-    //not really needed because there is now only one ammotext now
-
-    // public void AmmoUIPause(){
-    //     foreach (GameObject i in ammoUIObjects)
-    //     {
-    //         i.SetActive(false);
-    //     }
-        
-    // }
-    //  public void AmmoUIUnPause(){
-    //     foreach (GameObject i in ammoUIObjects)
-    //     {
-    //         i.SetActive(true);
-    //     }
-    // }
 }
